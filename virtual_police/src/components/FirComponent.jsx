@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import HomeComponent from "./HomeComponent";
 var fs = require('fs');
 var pdf = require('html-pdf');
-var html = fs.readFileSync('../../public/index.html', 'utf8');
+var html = fs.readFileSync('l', 'utf8');
 var options = { format: 'Letter'};
 
 class FirComponent extends Component{
