@@ -6,7 +6,7 @@ class HomeComponent extends Component{
     state = {
         fileFir: false,
         firStatus: false
-    }
+    };
 
     constructor(props, context) {
         super(props, context);

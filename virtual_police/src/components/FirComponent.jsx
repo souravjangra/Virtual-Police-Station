@@ -22,6 +22,9 @@ class FirComponent extends Component{
             email: "",
             subject: "",
             incident: "",
+            police_station_name: "",
+            police_station_address: "",
+            police_station_pin: ""
         };
 
         this.openModal = this.openModal.bind(this);
@@ -64,6 +67,9 @@ class FirComponent extends Component{
         console.log("submitted fir.");
         console.log(this.state.date);
 
+        this.setState({subject: "FIR Related to " + this.state.subject});
+        console.log(this.state.subject);
+
         axios({
             method: 'post',
             url: 'http://localhost:8081/generateFIR',
@@ -73,7 +79,11 @@ class FirComponent extends Component{
                 email: this.state.email,
                 date: this.state.date,
                 subject: this.state.subject,
-                incident: this.state.incident
+                incident: this.state.incident,
+                police_station_name: this.state.police_station_name,
+                police_station_address: this.state.police_station_address,
+                police_station_pin: this.state.police_station_pin,
+                applicant_name: this.state.name
 
             },
             // headers: {'Content-Type': 'text/html' }
@@ -147,17 +157,17 @@ class FirComponent extends Component{
                     <form onSubmit={this.openModal}>
                         <div className="form-group">
                             <label>
-                                Name:<br/>
-                                <input id="name" type="text" name="name" className="form-control" placeholder="Applicant’s Name or Father’s/Husband’s Name" size="80"
+                                Name:<br/>                            </label>
+
+                            <input id="name" type="text" name="name" className="form-control" placeholder="Applicant’s Name or Father’s/Husband’s Name"
                                 value={this.state.name} onChange={(e) => {this.setState({name: e.currentTarget.value})}}
                                 />
-                            </label>
                             <br/>
 
                             <label>
                                 Nature of Offence:<br/>
                             </label>
-                            <select id="inputState" className="form-control">
+                            <select value={this.state.subject} onChange={(e) => {this.setState( {subject: e.currentTarget.value})}} id="inputState" className="form-control">
                                 <option selected>Choose...</option>
                                 <option>theft</option>
                                 <option>murder</option>
@@ -175,18 +185,46 @@ class FirComponent extends Component{
                             />
                             <br/>
 
+                            <div className="form-row">
+                                <div className="form-group col-md-6">
+                                    <label >Nearest Police Station Name</label>
+                                    <input
+                                        value={this.state.police_station_name}
+                                        onChange={(e)=>{this.setState({police_station_name: e.currentTarget.value})}}
+                                        type="text" className="form-control" id="police_station_name" />
+                                </div>
+                                <div className="form-group col-md-4">
+                                    <label>City</label>
+                                    <select
+                                        value={this.state.police_station_address}
+                                        onChange={(e)=>{this.setState({police_station_address: e.currentTarget.value})}}
+                                        id="inputState" className="form-control">
+                                        <option selected>Choose...</option>
+                                        <option>...</option>
+                                    </select>
+                                </div>
+                                <div className="form-group col-md-2">
+                                    <label>PinCode</label>
+                                    <input
+                                        value={this.state.police_station_pin}
+                                        onChange={(e)=>{this.setState({police_station_pin: e.currentTarget.value})}}
+                                        type="text" className="form-control" id="police_station_pin" />
+                                </div>
+                            </div>
+
                             <label>
                                 Phone No:<br/>
-                                <input value={this.state.mobile} onChange={(e) => {this.setState( {mobile: e.currentTarget.value})}} type="text" name="phone" className="form-control" placeholder="Applicant’s Phone No." size="80"/>
                             </label>
+
+                            <input value={this.state.mobile} onChange={(e) => {this.setState( {mobile: e.currentTarget.value})}} type="text" name="phone" className="form-control" placeholder="Applicant’s Phone No."/>
                             <br/>
 
                             <label>
-                                Address:<br/>
+                                Address:                            </label>
+                            <br/>
                                 <input value={this.state.address}
                                        onChange={(e) => {this.setState({address: e.currentTarget.value})}}
-                                       type="text" name="address" className="form-control" placeholder="Applicant’s Contact Address" size="80"/>
-                            </label>
+                                       type="text" name="address" className="form-control" placeholder="Applicant’s Contact Address"/>
                             <br/>
 
                             <div className="form-row">
@@ -208,12 +246,12 @@ class FirComponent extends Component{
                             </div>
 
                             <label>
-                                Email Address:<br/>
+                                Email Address:                            </label>
+                            <br/>
                                 <input
                                     value={this.state.email}
                                     onChange={(e) => {this.setState({email: e.currentTarget.value})}}
-                                    type="text" name="email" className="form-control" placeholder="Applicant’s Email Address(If Any)" size="80"/>
-                            </label>
+                                    type="text" name="email" className="form-control" placeholder="Applicant’s Email Address(If Any)"/>
                             <br/>
 
                             {/*<label>*/}

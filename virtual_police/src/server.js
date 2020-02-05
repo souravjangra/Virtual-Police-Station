@@ -46,7 +46,7 @@ app.post('/confirmFIR',urlencodedParser,function(req,res){
 })
 
 app.post('/generateFIR',urlencodedParser,function(req,res){
-    let html = fs.readFileSync('./fir.html', 'utf8');
+    let html = fs.readFileSync('./fir1.html', 'utf8');
     let options = { format: 'Letter' };
 
     let name = req.body.name;
@@ -54,6 +54,11 @@ app.post('/generateFIR',urlencodedParser,function(req,res){
     let mobile = req.body.mobile;
     let email = req.body.email;
     let date = req.body.date;
+    let police_station_name = req.body.police_station_name;
+    let police_station_address = req.body.police_station_address;
+    let police_station_pin = req.body.police_station_pin;
+    let subject = req.body.subject;
+    let applicant_name = req.body.applicant_name;
     let incident = req.body.incident;
 
     htmlFileToBeChanged = parse(html);
@@ -62,7 +67,12 @@ app.post('/generateFIR',urlencodedParser,function(req,res){
     htmlFileToBeChanged.querySelector("#person_mobile_no").setAttribute('value',mobile);
     htmlFileToBeChanged.querySelector("#person_email_id").setAttribute('value',email);
     htmlFileToBeChanged.querySelector("#date").setAttribute('value',date);
+    htmlFileToBeChanged.querySelector("#subject").setAttribute('value', subject);
     htmlFileToBeChanged.querySelector("#incident").setAttribute('value',incident);
+    htmlFileToBeChanged.querySelector("#police_station_name").setAttribute('value',police_station_name);
+    htmlFileToBeChanged.querySelector("#police_station_address").setAttribute('value',police_station_address);
+    htmlFileToBeChanged.querySelector("#police_station_pin").setAttribute('value',police_station_pin);
+    htmlFileToBeChanged.querySelector("#applicant_name").setAttribute('value',applicant_name);
 
     console.log("name is " + req.body.name);
 

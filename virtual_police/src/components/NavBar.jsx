@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import "bootstrap/js/src/collapse.js";
+import {NavLink} from "react-router-dom";
 
 class NavBar extends Component{
 
@@ -13,10 +15,11 @@ class NavBar extends Component{
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <a className="nav-item nav-link active" href="#">Home <span className="sr-only">(current)</span></a>
-                        <a className="nav-item nav-link" href="#">My Profile</a>
-                        <a className="nav-item nav-link" href="#">About Us</a>
-                        <a className="nav-item nav-link" href="#">Contact Us</a>
+                        <NavLink exact activeClassName="active" to="/">
+                        <a className="nav-item nav-link" href="/">Home <span className="sr-only">(current)</span></a></NavLink>
+                        <NavLink exact activeClassName="active" to="/profile"><a className="nav-item nav-link" href="/profile">My Profile</a></NavLink>
+                        <NavLink exact activeClassName="active" to="/about"><a className="nav-item nav-link" href="/about">About Us</a></NavLink>
+                        <NavLink exact activeClassName="active" to="/contact"><a className="nav-item nav-link" href="/contact">Contact Us</a></NavLink>
                     </div>
                 </div>
             </nav>
